@@ -7,47 +7,32 @@
         <groupId>com.alibaba.nacos</groupId>
         <version>0.2.0-SNAPSHOT</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nacos-spring-cloud-consumer-example</artifactId>
+    <artifactId>nacos-admin</artifactId>
 
     <properties>
-        <spring-cloud-openfeign.version>2.0.0.RELEASE</spring-cloud-openfeign.version>
-        <spring-cloud-netflix.version>2.0.0.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>
+        <spring-cloud-netflix.version>2.1.0.RELEASE</spring-cloud-netflix.version>
+        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>
+
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-<!--&lt;!&ndash;            <exclusions>&ndash;&gt;-->
-<!--&lt;!&ndash;                <exclusion>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <artifactId>spring-boot-starter-tomcat</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;                </exclusion>&ndash;&gt;-->
-<!--&lt;!&ndash;            </exclusions>&ndash;&gt;-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-undertow</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.1.1.RELEASE</version>
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.springframework.boot</groupId>-->
+            <!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>2.1.1.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <version>2.1.1.RELEASE</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-undertow</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>io.github.openfeign</groupId>
@@ -66,7 +51,7 @@
             <version>${spring-cloud-openfeign.version}</version>
         </dependency>
 
-      <!--  <dependency>
+  <!--      <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <exclusions>
@@ -88,22 +73,25 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
+<!--        <dependency>-->
+<!--            <groupId>de.codecentric</groupId>-->
+<!--            <artifactId>spring-boot-admin-starter-client</artifactId>-->
+<!--            <version>2.1.6</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>2.0.0</version>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
+        <!-- admin -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
-            <version>2.1.1.RELEASE</version>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server</artifactId>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-            <version>2.1.1.RELEASE</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -128,4 +116,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

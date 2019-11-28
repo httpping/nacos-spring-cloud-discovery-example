@@ -1,6 +1,7 @@
 package com.alibaba.nacos.example.spring.cloud;
 
 import com.alibaba.nacos.example.spring.cloud.feign.FeignTypeRequest;
+import com.alibaba.nacos.example.spring.cloud.feign.FeignTypeRequest2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +26,9 @@ public class NacosConsumerApplication {
     @Autowired
     FeignTypeRequest feignTest;
 
+    @Autowired
+    FeignTypeRequest2 feignTest2;
+
     @LoadBalanced
     @Bean
     public RestTemplate restTemplate() {
@@ -46,10 +50,11 @@ public class NacosConsumerApplication {
         @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
         public String echo(@PathVariable String str) {
             try {
-                Thread.sleep((long) (Math.random()*2000));
+                Thread.sleep((long) (Math.random()*1000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            str = feignTest2.echo("ssss");
             return feignTest.echo(str);
 //            return restTemplate.getForObject("http://service-provider/echo/" + str, String.class);
         }
