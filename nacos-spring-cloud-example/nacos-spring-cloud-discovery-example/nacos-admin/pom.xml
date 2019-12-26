@@ -12,9 +12,9 @@
     <artifactId>nacos-admin</artifactId>
 
     <properties>
-        <spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>
-        <spring-cloud-netflix.version>2.1.0.RELEASE</spring-cloud-netflix.version>
-        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>
+<!--        <spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>-->
+<!--        <spring-cloud-netflix.version>2.1.0.RELEASE</spring-cloud-netflix.version>-->
+<!--        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>-->
 
     </properties>
 
@@ -22,12 +22,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>org.springframework.boot</groupId>-->
-            <!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
@@ -35,8 +29,14 @@
         <!--        </dependency>-->
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-httpclient</artifactId>
+            <version>${feign-httpclient.version}</version>
         </dependency>
 
         <dependency>
@@ -51,20 +51,6 @@
             <version>${spring-cloud-openfeign.version}</version>
         </dependency>
 
-  <!--      <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alibaba.nacos</groupId>
-                    <artifactId>nacos-client</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>-->
-        <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -72,14 +58,10 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
+<!--            <version>${prometheus.version}</version>-->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
-<!--        <dependency>-->
-<!--            <groupId>de.codecentric</groupId>-->
-<!--            <artifactId>spring-boot-admin-starter-client</artifactId>-->
-<!--            <version>2.1.6</version>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui</artifactId>
@@ -90,6 +72,11 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server</artifactId>
             <version>${spring-boot-admin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
     </dependencies>

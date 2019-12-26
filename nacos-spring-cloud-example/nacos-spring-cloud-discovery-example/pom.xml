@@ -2,11 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--    <parent>-->
+<!--        <artifactId>nacos-spring-cloud-example</artifactId>-->
+<!--        <groupId>com.alibaba.nacos</groupId>-->
+<!--        <version>0.2.0-SNAPSHOT</version>-->
+<!--    </parent>-->
+
     <parent>
-        <artifactId>nacos-spring-cloud-example</artifactId>
-        <groupId>com.alibaba.nacos</groupId>
-        <version>0.2.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.0.RELEASE</version>
+        <relativePath/>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <version>0.2.0-SNAPSHOT</version>
     <artifactId>nacos-spring-cloud-discovery-example</artifactId>
@@ -23,61 +31,129 @@
     </modules>
 
     <properties>
-        <spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>
-        <spring-cloud-netflix.version>2.1.0.RELEASE</spring-cloud-netflix.version>
-        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
-        <sleuth.version>2.1.1.RELEASE</sleuth.version>
+        <spring-cloud-openfeign.version>2.2.0.RELEASE</spring-cloud-openfeign.version>
+        <spring-cloud-netflix.version>2.2.0.RELEASE</spring-cloud-netflix.version>
+        <spring-boot.version>2.2.0.RELEASE</spring-boot.version>
+        <spring.boot.version>2.2.0.RELEASE</spring.boot.version>
+
+        <sleuth.version>2.2.0.RELEASE</sleuth.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <com.alibaba.cloud.version>2.1.1.RELEASE</com.alibaba.cloud.version>
+        <spring-cloud.version>Hoxton</spring-cloud.version>
+        <com.alibaba.cloud.version>2.2.0.RELEASE</com.alibaba.cloud.version>
         <sharding-sphere.version>3.1.0</sharding-sphere.version>
+
+        <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
+        <spring-cloud-openfeign.version>2.2.0.RELEASE</spring-cloud-openfeign.version>
+        <spring-cloud-netflix.version>2.2.0.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud-sleuth.version>2.2.0.RELEASE</spring-cloud-sleuth.version>
+
+
+        <feign-httpclient.version>10.7.0</feign-httpclient.version>
+<!--        <io.github.openfeign.version>10.7.0</io.github.openfeign.version>-->
+        <de.codecentric.version>2.2.0.RELEASE</de.codecentric.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <prometheus.version>1.3.2</prometheus.version>
+        <spring.cloud.alibaba.version>0.2.2.RELEASE</spring.cloud.alibaba.version>
+        <nacos.client.version>1.1.4</nacos.client.version>
+
+        <log4j2.version>2.6.2</log4j2.version>
+
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+
+
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--                <version>${spring-boot.version}</version>-->
-<!--            </dependency>-->
-            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>2.1.1.RELEASE</version>
-            </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
-                <version>1.1.4</version>
+                <version>${nacos.client.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-sleuth</artifactId>
-                <version>2.1.1.RELEASE</version>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-zipkin</artifactId>
-                <version>2.1.1.RELEASE</version>
+                <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.1.1.RELEASE</version>
+                <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>2.1.1.RELEASE</version>
+                <version>${spring.boot.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-openfeign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-httpclient</artifactId>
+                <version>${feign-httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+                <version>${spring-cloud-netflix.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-openfeign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
