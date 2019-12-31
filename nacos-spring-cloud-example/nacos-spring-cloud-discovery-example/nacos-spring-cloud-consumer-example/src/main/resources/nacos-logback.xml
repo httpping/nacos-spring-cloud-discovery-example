@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="true" scanPeriod="30 seconds" packagingData="true">
     <contextName>nacos</contextName>
-	<property name="logPath" value="/data/logs/fas_system/ap-logistics-job/nacos"/>
+	<property name="logPath" value="log/nacos"/>
     <appender name="CONFIG_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logPath}/config.log</file>
 
