@@ -28,6 +28,7 @@
         <module>nacos-spring-cloud-provider2-example</module>
 
         <module>nacos-admin</module>
+        <module>nacos-spring-cloud-common</module>
     </modules>
 
     <properties>
@@ -75,6 +76,17 @@
             <version>3.4.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
