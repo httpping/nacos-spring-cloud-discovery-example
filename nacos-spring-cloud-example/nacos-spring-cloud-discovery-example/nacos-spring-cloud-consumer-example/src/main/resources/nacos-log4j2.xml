@@ -2,8 +2,8 @@
 <Configuration status="WARN">
 	<!-- 日志文件目录和压缩文件目录配置 -->
 	<Properties>
-		<Property name="appName">ap-logistics-job</Property>
-		<Property name="logPath">/data/logs/fas_system/ap-logistics-job/nacos</Property>
+		<Property name="appName">app-consumer</Property>
+		<Property name="logPath">logs/nacos</Property>
 	</Properties>
 	<Appenders>
 		<RollingFile name="CONFIG_LOG_FILE"

@@ -28,7 +28,7 @@ Configuration后面的status，这个用于设置log4j2自身内部的信息输�
         <RollingRandomAccessFile
             name="fileOut"
             fileName="${logPath}/${appName}.log"
-            immediateFlush="true"
+            immediateFlush="false"
             filePattern="${logPath}/$${date:yyyy-MM}/${appName}-%d{yyyy-MM-dd-HH}-%i.gz">
             <PatternLayout>
                 <pattern>${filePattern}</pattern>
