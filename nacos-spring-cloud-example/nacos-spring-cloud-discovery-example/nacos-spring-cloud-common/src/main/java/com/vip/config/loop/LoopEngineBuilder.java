@@ -1,9 +1,13 @@
 package com.vip.config.loop;
 
 import com.lmax.disruptor.ExceptionHandler;
+import com.vip.config.loop.monitor.LoopMonitorService;
+
+import java.util.UUID;
 
 /**
  *
+ * @author tanping
  */
 public class LoopEngineBuilder {
     private ProducerHandler producerHandler;
@@ -18,6 +22,9 @@ public class LoopEngineBuilder {
      * 生产者数量
      */
     private int producerNum =1;
+
+
+    private LoopMonitorService loopMonitorService;
 
     public static LoopEngineBuilder newBuilder() {
         return new LoopEngineBuilder();
@@ -45,6 +52,11 @@ public class LoopEngineBuilder {
 
     public LoopEngineBuilder setMaxWork(int maxWork) {
         this.maxWork = maxWork;
+        return this;
+    }
+
+    public LoopEngineBuilder setLoopMonitorService(LoopMonitorService loopMonitorService) {
+        this.loopMonitorService = loopMonitorService;
         return this;
     }
 
@@ -100,13 +112,27 @@ public class LoopEngineBuilder {
         if (name != null) {
             loopEngine.setName(name);
         }
+
+        if (loopMonitorService !=null){
+            loopEngine.setLoopMonitorService(loopMonitorService);
+        }
+
         if (producerHandler != null) {
             loopEngine.setProducerHandler(producerHandler);
         } else {
             return null;
         }
-        loopEngine.initEnv();
-        loopEngine.loop();
+        try {
+            if (loopMonitorService!=null){
+                loopMonitorService.register(loopEngine);
+            }
+            loopEngine.setId(UUID.randomUUID().toString());
+            loopEngine.initEnv();
+            loopEngine.loop();
+        }finally {
+
+        }
+
         return loopEngine;
     }
 

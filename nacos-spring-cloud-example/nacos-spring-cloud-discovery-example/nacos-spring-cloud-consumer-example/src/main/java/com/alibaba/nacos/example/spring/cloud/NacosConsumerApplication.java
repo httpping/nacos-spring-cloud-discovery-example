@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
+@ComponentScan({"com.alibaba.nacos.example.spring.cloud","com.vip.config.loop"})
 public class NacosConsumerApplication {
 
     @Autowired
@@ -28,6 +30,9 @@ public class NacosConsumerApplication {
 
     @Autowired
     FeignTypeRequest2 feignTest2;
+
+    @Autowired
+    LoogTest loogTest;
 
     @LoadBalanced
     @Bean
@@ -37,6 +42,7 @@ public class NacosConsumerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NacosConsumerApplication.class, args);
+
     }
 
     @RestController
@@ -54,8 +60,16 @@ public class NacosConsumerApplication {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            str = feignTest2.echo("ssss");
-            return feignTest.echo(str);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    loogTest.test();
+                }
+            }).start();
+
+//            str = feignTest2.echo("ssss");
+//            return feignTest.echo(str);
+            return "ad";
 //            return restTemplate.getForObject("http://service-provider/echo/" + str, String.class);
         }
 

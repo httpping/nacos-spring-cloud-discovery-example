@@ -62,7 +62,7 @@ public class MoreLoopsEngin<T> extends LoopEngine<T> {
                     }finally {
                         countDownLatch.countDown();
                     }
-                }).start();
+                },name+"-Thread-"+i).start();
             }
             countDownLatch.await();
         } catch (Exception e) {
@@ -72,6 +72,7 @@ public class MoreLoopsEngin<T> extends LoopEngine<T> {
             System.out.println("结束开始");
             disruptor.shutdown();
             System.out.println("结束结束");
+            clear();
             //准备锁
             producerHandler.finish(count.intValue(),consumerCount.intValue());
         }

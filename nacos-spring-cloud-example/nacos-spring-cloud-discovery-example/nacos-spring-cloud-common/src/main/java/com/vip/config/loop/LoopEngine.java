@@ -1,5 +1,6 @@
 package com.vip.config.loop;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.ExceptionHandler;
 import com.lmax.disruptor.RingBuffer;
@@ -7,6 +8,7 @@ import com.lmax.disruptor.WorkHandler;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 import com.vip.config.loop.lmax.*;
+import com.vip.config.loop.monitor.LoopMonitorService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -27,9 +29,13 @@ import java.util.concurrent.atomic.AtomicLong;
 public class LoopEngine<T> {
 
     protected int ringBatchSize = 16;
+    @JsonIgnore
     protected Disruptor<EventData> disruptor;
+    @JsonIgnore
     protected DefaultEventProducer producer;
+    @JsonIgnore
     protected ProducerHandler<T> producerHandler;
+    @JsonIgnore
     protected ExceptionHandler exceptionHandler;
 
     protected AtomicLong count = new AtomicLong(0);
@@ -40,13 +46,19 @@ public class LoopEngine<T> {
     protected AtomicLong consumerCount = new AtomicLong(0);
 
     protected String name;
+    protected String id ;
 
     protected boolean isRun = true;
+    @JsonIgnore
+    private LoopMonitorService loopMonitorService;
 
     /**
      * 生产者数量
      */
     protected int producerNum =1;
+
+
+    protected long startTime = System.currentTimeMillis();
 
 
     public void initEnv() {
@@ -131,6 +143,7 @@ public class LoopEngine<T> {
             System.out.println("结束开始");
             disruptor.shutdown();
             System.out.println("结束结束");
+            clear();
             //准备锁
             producerHandler.finish(count.intValue(),consumerCount.intValue());
         }
@@ -147,6 +160,18 @@ public class LoopEngine<T> {
      */
     public boolean shutdown(){
         isRun =false;
+        return true;
+    }
+
+
+    public boolean register(){
+
+        return true;
+    }
+    public boolean clear(){
+        if (loopMonitorService!=null){
+            loopMonitorService.remove(this);
+        }
         return true;
     }
 

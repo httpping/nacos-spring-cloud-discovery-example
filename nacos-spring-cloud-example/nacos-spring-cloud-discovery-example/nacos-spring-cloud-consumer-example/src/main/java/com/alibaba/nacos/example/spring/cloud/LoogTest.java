@@ -1,34 +1,41 @@
-package com.vip.config.loop;
+package com.alibaba.nacos.example.spring.cloud;
 
+import com.vip.config.loop.LoopEngineBuilder;
+import com.vip.config.loop.ProducerHandler;
+import com.vip.config.loop.monitor.LoopMonitorService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 测试引擎
+ * TODO
  *
  * @author dean <tanping@globalegrow.com>
  * @version 1.0.0
- * @date 2020/01/03 14:59
+ * @date 2020/01/06 10:03
  * @since 1.0.0
  */
+@Service
 @Log4j2
-public class TestLmax {
+public class LoogTest {
 
-    public static void main(String[] args) {
+    @Autowired
+    LoopMonitorService loopMonitorService;
 
+
+    public void test(){
         ConcurrentHashMap<Long, Long> pageMap = new ConcurrentHashMap<>();
         ConcurrentHashMap<Long, Long> resultMap = new ConcurrentHashMap<>();
         AtomicLong dataCount = new AtomicLong();
 
-
-        LoopEngineBuilder.newBuilder().setEnd(100000).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
+        LoopEngineBuilder.newBuilder().setEnd(1000000).setLoopMonitorService(loopMonitorService).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
             int count = 0;
+
             @Override
             public List loop(long number) {
 
@@ -49,7 +56,7 @@ public class TestLmax {
             @Override
             public boolean worker(Long data) {
                 if (data == 12) {
-                    throw new RuntimeException();
+//                    throw new RuntimeException();
                 }
                 if (resultMap.get(data) != null) {
                     throw new RuntimeException(data + "结果");
@@ -70,7 +77,5 @@ public class TestLmax {
             }
 
         }).build();
-
-
     }
 }

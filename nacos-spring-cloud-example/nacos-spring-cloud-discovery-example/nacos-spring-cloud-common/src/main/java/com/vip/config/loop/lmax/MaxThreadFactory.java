@@ -13,6 +13,8 @@ import java.util.concurrent.ThreadFactory;
 public class MaxThreadFactory implements ThreadFactory {
     @Override
     public Thread newThread(Runnable r) {
-        return new Thread(r);
+        Thread thread = new Thread(r);
+        thread.setName("vip-loop-"+thread.getName());
+        return thread;
     }
 }
