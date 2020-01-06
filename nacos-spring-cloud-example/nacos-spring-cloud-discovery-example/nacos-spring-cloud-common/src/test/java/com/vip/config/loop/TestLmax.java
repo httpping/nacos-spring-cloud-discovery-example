@@ -27,7 +27,7 @@ public class TestLmax {
         AtomicLong dataCount = new AtomicLong();
 
 
-        LoopEngineBuilder.newBuilder().setEnd(100000).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
+        LoopEngineBuilder.newBuilder().setName("ABC").setEnd(100000).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
             int count = 0;
             @Override
             public List loop(long number) {
@@ -49,7 +49,7 @@ public class TestLmax {
             @Override
             public boolean worker(Long data) {
                 if (data == 12) {
-                    throw new RuntimeException();
+//                    throw new RuntimeException();
                 }
                 if (resultMap.get(data) != null) {
                     throw new RuntimeException(data + "结果");

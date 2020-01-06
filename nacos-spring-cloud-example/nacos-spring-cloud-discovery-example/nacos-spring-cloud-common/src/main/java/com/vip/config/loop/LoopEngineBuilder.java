@@ -10,13 +10,43 @@ import java.util.UUID;
  * @author tanping
  */
 public class LoopEngineBuilder {
+
+    /**
+     * 工作handler
+     */
     private ProducerHandler producerHandler;
+
+    /**
+     * 消费者线程数量
+     */
     private int maxWork = 1;
+    /**
+     * 队列大小
+     */
     private int ringBatchSize;
+    /**
+     * 异常操作自定义
+     */
     private ExceptionHandler exceptionHandler;
+
+
+    /**
+     * 超时时间设置
+     */
     private long timeout = -1;
+
+    /**
+     * 开始页数
+     */
     private int start;
+    /**
+     * 结束页数 -1 数据为 null 结束
+     */
     private int end = -1;
+
+    /**
+     * 引擎 name
+     */
     private String name;
     /**
      * 生产者数量
@@ -111,6 +141,8 @@ public class LoopEngineBuilder {
         }
         if (name != null) {
             loopEngine.setName(name);
+        }else {
+            throw new IllegalArgumentException("name is null");
         }
 
         if (loopMonitorService !=null){

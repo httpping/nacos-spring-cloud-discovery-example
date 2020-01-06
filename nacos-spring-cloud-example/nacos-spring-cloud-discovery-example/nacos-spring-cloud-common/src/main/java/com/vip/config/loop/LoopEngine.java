@@ -102,7 +102,7 @@ public class LoopEngine<T> {
     }
 
     protected void createDisruptor(DefaultEventFactory peopleEventFactory, int buffSize) {
-        disruptor = new Disruptor<EventData>(peopleEventFactory, buffSize, new MaxThreadFactory(),
+        disruptor = new Disruptor<EventData>(peopleEventFactory, buffSize, new MaxThreadFactory(this),
                 ProducerType.SINGLE, new BlockingWaitStrategy());
     }
 
@@ -113,7 +113,7 @@ public class LoopEngine<T> {
             while (isRun) {
 
                 if (end == page) {
-                    producerHandler.end(count.intValue(), false, true);
+                    producerHandler.end(count.longValue(), false, true);
                     return true;
                 }
 
@@ -121,14 +121,14 @@ public class LoopEngine<T> {
                 page++;
 
                 if (result == null || result.size() == 0) {
-                    producerHandler.end(count.intValue(), false, true);
+                    producerHandler.end(count.longValue(), false, true);
                     return true;
                 }
                 //遍历每一个对账单
                 for (T entity : result) {
                     //运行时间过长了
                     if (isTimeouts(startTime)) {
-                        producerHandler.end(count.intValue(), true, false);
+                        producerHandler.end(count.longValue(), true, false);
                         return true;
                     }
                     producer.onData(entity);

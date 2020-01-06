@@ -33,7 +33,7 @@ public class LoogTest {
         ConcurrentHashMap<Long, Long> resultMap = new ConcurrentHashMap<>();
         AtomicLong dataCount = new AtomicLong();
 
-        LoopEngineBuilder.newBuilder().setEnd(1000000).setLoopMonitorService(loopMonitorService).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
+        LoopEngineBuilder.newBuilder().setName(System.currentTimeMillis()+"").setEnd(1000000).setLoopMonitorService(loopMonitorService).setMaxWork(10).setProducerNum(10).setRingBatchSize(128).setProducerHandler(new ProducerHandler<Long>() {
             int count = 0;
 
             @Override

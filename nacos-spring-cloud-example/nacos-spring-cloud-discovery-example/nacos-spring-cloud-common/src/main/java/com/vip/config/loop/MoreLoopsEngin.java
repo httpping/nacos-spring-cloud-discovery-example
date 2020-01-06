@@ -37,19 +37,19 @@ public class MoreLoopsEngin<T> extends LoopEngine<T> {
                     try {
                         while (isRun) {
                             if (end == pageStart.intValue()) {
-                                producerHandler.end(count.intValue(), false, true);
+                                producerHandler.end(count.longValue(), false, true);
                                 return;
                             }
                             List<T> result = producerHandler.loop(pageStart.getAndIncrement());
                             if (result == null || result.size() == 0) {
-                                producerHandler.end(count.intValue(), false, true);
+                                producerHandler.end(count.longValue(), false, true);
                                 return;
                             }
                             //遍历每一个data
                             for (T entity : result) {
                                 //运行时间过长了
                                 if (isTimeouts(startTime)) {
-                                    producerHandler.end(count.intValue(), true, false);
+                                    producerHandler.end(count.longValue(), true, false);
                                     return ;
                                 }
                                 producer.onData(entity);
@@ -82,7 +82,7 @@ public class MoreLoopsEngin<T> extends LoopEngine<T> {
 
     @Override
     protected void createDisruptor(DefaultEventFactory peopleEventFactory, int buffSize) {
-        disruptor = new Disruptor<EventData>(peopleEventFactory, buffSize, new MaxThreadFactory(),
+        disruptor = new Disruptor<EventData>(peopleEventFactory, buffSize, new MaxThreadFactory(this),
                 ProducerType.MULTI, new BlockingWaitStrategy());
     }
 }
